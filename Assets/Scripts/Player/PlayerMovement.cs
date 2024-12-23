@@ -27,20 +27,17 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _inAir; //if player is in air
     private float _airTimer; //time while in air
-    private bool _removedJump; //If one jump has been removed from jumpsleft
 
     [Header("Jump")]
     public float initialJumpForce; //jump velocity
     public float continuedJumpForce; //jump velocity when holding space for higher jump
     public float continuedJumpDuration; //time allowed to hold jump button for extra height
     private float _continuedJumpTimer;
-    
+
     private bool _wishJump; //if the player wishes to jump
     private bool _wishedJumpPerformed;
     public float jumpGap; //amount of time the player can still jump after running off an edge
     private bool _inJump; //If the player is currently doing a jump
-
-    public GameObject cloudPrefab;
 
     [Header("Misc")]
     public Transform cameraPivot; // Camera pivot
@@ -72,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
@@ -102,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleInputs();
         }
-            
+
         //update grounded
         isGrounded = _controller.isGrounded;
 
@@ -113,9 +110,8 @@ public class PlayerMovement : MonoBehaviour
         //Ground and air movement
         if (isGrounded)
         {
-            _removedJump = false;
             _inJump = false;
-            Land();   
+            Land();
         }
         else
         {
@@ -125,14 +121,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Move();
-        
+
 
         oldPos = transform.position;
 
         MoveThePlayer();
 
         CancelVelocity();
-        
+
     }
 
     #endregion
@@ -146,24 +142,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _airTimer += Time.deltaTime;
         _landed = false;
-        
-        if(_airTimer >= jumpGap && !_removedJump && !_inJump)
-        {
-            _removedJump = true;
-        }
 
         if (_wishJump && _wishedJumpPerformed)
         {
             _continuedJumpTimer += Time.deltaTime;
         }
-    }
-
-    void RotateCharacterTowardsMoveDirection(Vector3 targetDir)
-    {
-        if (targetDir.magnitude < 0.9) return;
-
-        Quaternion rotTarget = Quaternion.LookRotation(targetDir, Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotTarget, (500f*Time.deltaTime));
     }
 
 
@@ -176,14 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
         _movement = new Vector2(right - left, forward - backwards);
 
-        Vector3 forwardMovement = cameraPivot.forward * _movement.y;
-        Vector3 sidewaysMovement = cameraPivot.right * _movement.x;
-        Vector3 cameraRelativeMovement = forwardMovement + sidewaysMovement;
-        Vector3 cameraRelativeMovementLocal = transform.InverseTransformDirection(cameraRelativeMovement);
-
-        moveVec = new Vector3(cameraRelativeMovementLocal.x, 0, cameraRelativeMovementLocal.z).normalized;
-
-        RotateCharacterTowardsMoveDirection(new Vector3(cameraRelativeMovement.x, 0, cameraRelativeMovement.z).normalized);
+        moveVec = new Vector3(_movement.x, 0, _movement.y).normalized;
     }
 
 
@@ -214,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
         vel = new Vector3(newVelXZ.x, vel.y, newVelXZ.z);
 
         movedDistance += newVelXZ.magnitude * Time.deltaTime;
-        if(movedDistance > stepDistance)
+        if (movedDistance > stepDistance)
         {
             movedDistance -= stepDistance;
         }
@@ -228,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_wishJump) return;
 
-        if(isGrounded || _airTimer < jumpGap || !_wishedJumpPerformed)
+        if (isGrounded || _airTimer < jumpGap)
         {
             if (vel.y <= initialJumpForce)
             {
@@ -241,10 +217,10 @@ public class PlayerMovement : MonoBehaviour
             AdjustValuesWhenJumpPerformed();
 
         }
-        else if(_wishedJumpPerformed && _continuedJumpTimer < continuedJumpDuration && vel.y <= initialJumpForce*1.5f) //Only if player has less velocity than the highest you can reach from a normal jump
-        {
-            vel.y = vel.y + (continuedJumpForce*200*Time.deltaTime);
-        }
+        // else if (_wishedJumpPerformed && _continuedJumpTimer < continuedJumpDuration && vel.y <= initialJumpForce * 1.5f) //Only if player has less velocity than the highest you can reach from a normal jump
+        // {
+        //     vel.y = vel.y + (continuedJumpForce * 200 * Time.deltaTime);
+        // }
         else
         {
             _wishJump = false;
@@ -297,7 +273,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         vel.y = -2;
- 
+
         _landed = true;
     }
 
@@ -312,14 +288,14 @@ public class PlayerMovement : MonoBehaviour
     void CancelVelocity()
     {
 
-        if(Mathf.Abs(transform.position.x - oldPos.x) < Mathf.Abs(vel.x * Time.deltaTime * 0.2f * _speedMultiplier))
+        if (Mathf.Abs(transform.position.x - oldPos.x) < Mathf.Abs(vel.x * Time.deltaTime * 0.2f * _speedMultiplier))
         {
             vel.x = 0;
         }
 
         if (Mathf.Abs(transform.position.y - oldPos.y) < Mathf.Abs(vel.y * Time.deltaTime * 0.2f * _speedMultiplier))
         {
-            if(vel.y > 0)
+            if (vel.y > 0)
             {
                 vel.y = 0;
             }
@@ -338,7 +314,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void LimitHorizonalSpeed()
     {
-        if(vel2D.magnitude > maxWalkSpeed)
+        if (vel2D.magnitude > maxWalkSpeed)
         {
             Vector2 limitedVel = vel2D.normalized * maxWalkSpeed;
             vel.x = limitedVel.x;
