@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a207096f729b3b44c806a3a2f2b2d153, type: 3}
+  m_Name: TestCreature
+  m_EditorClassIdentifier: 
+  type: 2
+  creatureName: RhinoTest
+  minMaxScale: {x: 0.7, y: 1.3}
+  minMaxWeight: {x: 2, y: 8}
+  minMaxValue: {x: 10, y: 17}
+  tickets: e8030000fa0000005a0000000f00000003000000
+  prefabVariations:
+  - {fileID: 9207233149408097049, guid: d625240eb4c61634b8bc85045a4ecb17, type: 3}
+  - {fileID: 2514904020166717112, guid: c30ede7256d4a034b89663c90154de85, type: 3}
+  - {fileID: 7561884714560499773, guid: 1650d55e6b903ee429f1ff9dfe1023d8, type: 3}
+  - {fileID: 7893656289447744880, guid: 06f6647330fd28143b13a96ba5b677bb, type: 3}
+  - {fileID: 3609317769196132305, guid: e6cc5dc3677669f41989b7215336a06c, type: 3}
+  valueMultiplier:
+  - 1
+  - 1.7
+  - 2.5
+  - 8
+  - 25
+  rarity: 0100000002000000030000000400000005000000

@@ -12,6 +12,9 @@ public class Creature : MonoBehaviour
 
     private bool isSleeping;
 
+    private CreatureData data;
+    public CreatureData Data { get { return data; } }
+
     void Start()
     {
 
@@ -21,6 +24,11 @@ public class Creature : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Setup(CreatureData data)
+    {
+        this.data = data;
     }
 
 

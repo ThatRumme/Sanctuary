@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Creature
+  - Item
+  - KillTrigger
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

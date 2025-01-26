@@ -22,16 +22,15 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        calculateHits();
+        CalculateHits();
         oldPos = transform.position;
     }
 
-    void calculateHits()
+    void CalculateHits()
     {
         RaycastHit hit;
         if (Physics.Raycast(oldPos, transform.position - oldPos, out hit, (transform.position - oldPos).magnitude))
         {
-            Debug.Log("Hit " + hit.transform.name);
 
             if (hit.transform.tag == "Creature")
             {

@@ -6,6 +6,8 @@ public class PlayerIngame : Player
 
     public Gun gun; //Gun
 
+    public Bag bag;
+
     public float netRange = 3f;
 
     [Header("Health")]
@@ -119,7 +121,7 @@ public class PlayerIngame : Player
         {
             if (markedCreature.PickUp())
             {
-                //Add to bag
+                bag.AddCreature(markedCreature.Data);
             }
         }
     }

@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager> {
 
     public Player player;
 
+    public WorldHandler worldHandler;
+
     private void Awake()
     {
         inputs = InputManager.Instance.inputs;
