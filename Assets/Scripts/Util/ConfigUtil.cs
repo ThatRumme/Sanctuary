@@ -39,26 +39,26 @@ class ConfigUtil : Singleton<ConfigUtil>
         return itemObjects[type];
     }
 
-    public int GetTotalTickets(int[] tickets)
+    public int GetTotalTickets(CreatureVariationEntry[] entries)
     {
         int totalTickets = 0;
-        for(int i = 0;i < tickets.Length;i++)
+        for(int i = 0;i < entries.Length;i++)
         {
-            totalTickets += tickets[i];
+            totalTickets += entries[i].tickets;
         }
         return totalTickets;
     }
 
     public int RollVariation(CreatureObject creature)
     {
-        int ticket = UnityEngine.Random.Range(0, GetTotalTickets(creature.tickets));
+        int ticket = UnityEngine.Random.Range(0, GetTotalTickets(creature.variations));
 
         int count = 0;
         int variation = -1;
 
         while(count < ticket)
         {
-            count += creature.tickets[variation+1];
+            count += creature.variations[variation+1].tickets;
             variation++;
         }
 
@@ -79,11 +79,11 @@ class ConfigUtil : Singleton<ConfigUtil>
 
         float scale = Mathf.Lerp(randomCreature.minMaxScale.x, randomCreature.minMaxScale.y, statRoll);
         float weight = Mathf.Lerp(randomCreature.minMaxWeight.x, randomCreature.minMaxWeight.y, statRoll);
-        int value = (int)Math.Round(Mathf.Lerp(randomCreature.minMaxValue.x, randomCreature.minMaxValue.y, statRoll) * randomCreature.valueMultiplier[variation]);
+        int value = (int)Math.Round(Mathf.Lerp(randomCreature.minMaxValue.x, randomCreature.minMaxValue.y, statRoll) * randomCreature.variations[variation].valueMultiplier);
 
-        Rarity rarity = randomCreature.rarity[variation];
+        Rarity rarity = randomCreature.variations[variation].rarity;
 
-        CreatureData creatureData = new CreatureData(randomCreature.type, randomCreature.name, variation, scale, weight, value, rarity);
+        CreatureData creatureData = CreatureData.CreateInstance(randomCreature.type, randomCreature.name, variation, scale, weight, value, rarity);
         
         return creatureData;
 

@@ -10,9 +10,16 @@ public class CreatureObject : ScriptableObject
     public Vector2 minMaxWeight = Vector2.one; //Kg
     public Vector2 minMaxValue = Vector2.one;
 
-    public int[] tickets = new int[1] {1000}; //odds
-    public GameObject[] prefabVariations = new GameObject[1]; //0 must be default
-    public float[] valueMultiplier = new float[1] {1};
-    public Rarity[] rarity = new Rarity[1] {Rarity.COMMON};
+    public CreatureVariationEntry[] variations;
     
+}
+
+
+[System.Serializable]
+public class CreatureVariationEntry
+{
+    public int tickets;
+    public GameObject prefab;
+    public float valueMultiplier;
+    public Rarity rarity;
 }

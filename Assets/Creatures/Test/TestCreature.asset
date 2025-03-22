@@ -31,3 +31,29 @@ MonoBehaviour:
   - 8
   - 25
   rarity: 0100000002000000030000000400000005000000
+  variations:
+  - tickets: 1000
+    prefab: {fileID: 9207233149408097049, guid: d625240eb4c61634b8bc85045a4ecb17,
+      type: 3}
+    valueMultiplier: 1
+    rarity: 1
+  - tickets: 250
+    prefab: {fileID: 2514904020166717112, guid: c30ede7256d4a034b89663c90154de85,
+      type: 3}
+    valueMultiplier: 1.7
+    rarity: 2
+  - tickets: 90
+    prefab: {fileID: 7561884714560499773, guid: 1650d55e6b903ee429f1ff9dfe1023d8,
+      type: 3}
+    valueMultiplier: 2.5
+    rarity: 3
+  - tickets: 15
+    prefab: {fileID: 7893656289447744880, guid: 06f6647330fd28143b13a96ba5b677bb,
+      type: 3}
+    valueMultiplier: 8
+    rarity: 4
+  - tickets: 3
+    prefab: {fileID: 3609317769196132305, guid: e6cc5dc3677669f41989b7215336a06c,
+      type: 3}
+    valueMultiplier: 25
+    rarity: 5

@@ -9,13 +9,11 @@ public class EventManager : MonoBehaviour {
     //Game
     public static event Action ResetLevel;
     public static event Action ApplySettings;
-    public static event Action<int> RuneObtained;
-    public static event Action<int> CrystalObtained;
-    public static event Action CollectablesUpdated;
-    public static event Action<int> AbilitySwitch;
-    public static event Action<int> ManaUpdated;
+    public static event Action<int> CreaturesValueUpdated;
+    public static event Action<int> ItemValueUpdated;
     public static event Action PlayerDeath;
     public static event Action<int> PlayerHealthUpdated;
+
 
     public static void OnResetLevel()
     {
@@ -27,29 +25,14 @@ public class EventManager : MonoBehaviour {
         ApplySettings?.Invoke();
     }
 
-    public static void OnRuneObtained(int id)
+    public static void OnCreaturesValueUpdated(int value)
     {
-        RuneObtained?.Invoke(id);
+        CreaturesValueUpdated?.Invoke(value);
     }
 
-    public static void OnCrystalObtained(int id)
+    public static void OnItemValueUpdated(int value)
     {
-        CrystalObtained?.Invoke(id);
-    }
-
-    public static void OnCollectablesUpdated()
-    {
-        CollectablesUpdated?.Invoke();
-    }
-
-    public static void OnAbilitySwitched(int ability)
-    {
-        AbilitySwitch?.Invoke(ability);
-    }
-
-    public static void OnManaUpdated(int ability)
-    {
-        ManaUpdated?.Invoke(ability);
+        ItemValueUpdated?.Invoke(value);
     }
 
     public static void OnPlayerDied()
@@ -59,5 +42,9 @@ public class EventManager : MonoBehaviour {
     public static void OnPlayerHealthUpdated(int newHealth)
     {
         PlayerHealthUpdated?.Invoke(newHealth);
+
     }
+
 }
+
+

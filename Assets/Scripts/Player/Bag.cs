@@ -5,8 +5,8 @@ using UnityEngine;
 public class Bag : MonoBehaviour
 {
 
-    private Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
-    private List<CreatureData> creatures = new List<CreatureData>();
+    private Dictionary<ItemType, int> inventory = new();
+    private List<CreatureData> creatures = new();
 
     private float weight = 0f;
     public float Weight { get { return weight; } }
@@ -14,7 +14,7 @@ public class Bag : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ItemObject item = new ItemObject();
+
     }
 
     // Update is called once per frame
@@ -28,12 +28,14 @@ public class Bag : MonoBehaviour
     {
         creatures.Add(creature);
         weight += creature.weight;
+        EventManager.OnCreaturesValueUpdated(GetCreaturesValue());
     }
 
     public void RemoveCreature(CreatureData creature)
     {
         creatures.Remove(creature);
         weight += creature.weight;
+        EventManager.OnCreaturesValueUpdated(GetCreaturesValue());
     }
 
     public void AddItem(ItemType itemType, int amount)
@@ -55,12 +57,13 @@ public class Bag : MonoBehaviour
     }
 
 
-    public void GetCreaturesValue()
+    public int GetCreaturesValue()
     {
         int totalValue = 0;
         for(int i = 0; i < creatures.Count; i++)
         {
             totalValue += creatures[i].value;
         }
+        return totalValue;
     }
 }

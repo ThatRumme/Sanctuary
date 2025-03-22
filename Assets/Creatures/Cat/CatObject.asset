@@ -23,3 +23,9 @@ MonoBehaviour:
   valueMultiplier:
   - 1
   rarity: 01000000
+  variations:
+  - tickets: 1000
+    prefab: {fileID: 9207233149408097049, guid: d625240eb4c61634b8bc85045a4ecb17,
+      type: 3}
+    valueMultiplier: 1
+    rarity: 1

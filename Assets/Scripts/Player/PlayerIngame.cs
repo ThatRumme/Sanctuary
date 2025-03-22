@@ -25,6 +25,8 @@ public class PlayerIngame : Player
     {
         base.Start();
         currentHealth = maxHealth;
+        bag = new Bag();
+
     }
 
     // Update is called once per frame

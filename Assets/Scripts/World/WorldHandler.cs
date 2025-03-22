@@ -7,6 +7,8 @@ public class WorldHandler : MonoBehaviour
 
     private bool isInitializing = true;
 
+    public Transform playerSpawn;
+
     private void Awake()
     {
         GameManager.Instance.worldHandler = this;
@@ -27,6 +29,9 @@ public class WorldHandler : MonoBehaviour
 
     void InitializeWorld()
     {
+        GameManager.Instance.player.transform.position = playerSpawn.position;
+        GameManager.Instance.player.transform.rotation = playerSpawn.rotation;
+
         FindSpawnPoints();
         SpawnCreatures();
         SpawnItems();
@@ -62,13 +67,19 @@ public class WorldHandler : MonoBehaviour
 
         CreatureData data = ConfigUtil.Instance.CreateRandomCreatureData(creatureObject);
 
-        GameObject creature = Instantiate(creatureObject.prefabVariations[data.prefabIndex]);
+        GameObject creature = Instantiate(creatureObject.variations[data.prefabIndex].prefab);
         creature.transform.position = spawnPos + new Vector3(0, 0.5f, 0);
         creature.GetComponent<Creature>().Setup(data);
 
     }
 
     void SpawnItems()
+    {
+
+    }
+
+
+    public void OnExtraction()
     {
 
     }
