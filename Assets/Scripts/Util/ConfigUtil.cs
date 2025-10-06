@@ -88,37 +88,4 @@ class ConfigUtil : Singleton<ConfigUtil>
         return creatureData;
 
     }
-
-    //public T[] GetAtPath<T>(string path)
-    //{
-
-    //    ArrayList al = new ArrayList();
-    //    string[] fileEntries = Directory.GetFiles(Application.dataPath + "/" + path);
-    //    Debug.Log("FileEntries");
-    //    Debug.Log(Application.dataPath + "/" + path);
-    //    Debug.Log(fileEntries.Length);
-    //    foreach (string fileName in fileEntries)
-    //    {
-    //        int index = fileName.LastIndexOf("/");
-    //        string localPath = "Assets/" + path;
-            
-    //        if (index > 0)
-    //            localPath += fileName.Substring(index);
-
-            
-
-    //        var t = AssetDatabase.LoadAssetAtPath(localPath, typeof(T));
-
-    //        Debug.Log(t);
-
-    //        if (t != null)
-    //            al.Add(t);
-    //    }
-    //    T[] result = new T[al.Count];
-    //    for (int i = 0; i < al.Count; i++)
-    //        result[i] = (T)al[i];
-
-    //    return result;
-    //}
-
 }
